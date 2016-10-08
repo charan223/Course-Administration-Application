@@ -1,12 +1,7 @@
-
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.HeadlessException;
 import javax.swing.JPanel;
-
-import sssfile.MyException;
-
-import javax.swing.JApplet;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -20,8 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.FlowLayout;
+import java.awt.CardLayout;
 
 class Participants {
 
@@ -208,40 +204,36 @@ class Course {
 
 }
 
-public class CourseListFinal extends JApplet {
 
+
+class CourseListFinal  {
+
+    private final JFrame frame=new JFrame();
+    
 	private static final boolean EOF = false;
 	private final JPanel Data = new JPanel();
 	private final JPanel Parts = new JPanel();
 
-	class MyException extends Exception {
-		private int ex;
-
-		MyException(int v) {
-			setEx(v);
-		}
-
-		public String toString() {
-			System.out.println("duration is more than 14 days");
-			Runtime.getRuntime().exit(0);
-			return ("null");
-
-		}
-
-		public int getEx() {
-			return ex;
-		}
-
-		public void setEx(int ex) {
-			this.ex = ex;
-		}
+	public static void main(String[] args) throws IOException,ParseException{
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CourseListFinal window = new CourseListFinal();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-
-	private boolean sum(int v) throws MyException {
-		if (v >= 15)
-			return true;
-		return false;
-	}
+	
+	String output = null;
+	String qwe = null;
+	String rty = null;
+	String uio = null;
+	String asd = null;
+	String bnm = null;
+	String cvb = null;
 
 	SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
 	Date somedate = null;
@@ -265,151 +257,172 @@ public class CourseListFinal extends JApplet {
 	File file = new File("input1.txt");
 	String line = null;
 
+	
 	Scanner scanme1;
-	ActionListener readmefilelistener=new ActionListener(){@Override public void actionPerformed(ActionEvent arg0){setVisible(false);Data.setVisible(false);Parts.setVisible(false);try{FileReader freader=new FileReader(file.getAbsoluteFile());@SuppressWarnings("resource")Scanner scanme1=new Scanner(freader);
+	ActionListener readmefilelistener = new ActionListener() {
+		
+		public void actionPerformed(ActionEvent arg0) {
+			frame.setVisible(false);
+			Data.setVisible(false);
+			Parts.setVisible(false);
+			try {
+				FileReader freader = new FileReader(file.getAbsoluteFile());
+			
+				Scanner scanme1 = new Scanner(freader);
 
-	int b=Integer.parseInt(scanme1.nextLine());while(b>0){Course check=new Course();
+				int b = Integer.parseInt(scanme1.nextLine());
+				while (b > 0) {
+					Course check = new Course();
 
-	check.setCoursename(scanme1.nextLine());
+					check.setCoursename(scanme1.nextLine());
 
-	check.setCoursefee(scanme1.nextLine());
+					check.setCoursefee(scanme1.nextLine());
 
-	date=scanme1.nextLine();somedate=format.parse(date);check.setStartdate(somedate);try{p=Integer.parseInt(scanme1.nextLine());
+					date = scanme1.nextLine();
+					somedate = format.parse(date);
+					check.setStartdate(somedate);
+					p = Integer.parseInt(scanme1.nextLine());
+					
+					check.setDuration(p);
 
-	sum(p);}catch(MyException me){
+					q = Integer.parseInt(scanme1.nextLine());
+					q1 = Integer.parseInt(scanme1.nextLine());
 
-	}check.setDuration(p);
+					while (scanme1.hasNext() != EOF) {
+						check.coursecoordinator.setDepartment(scanme1.nextLine());
 
-	q=Integer.parseInt(scanme1.nextLine());q1=Integer.parseInt(scanme1.nextLine());
+						check.coursecoordinator.setFacultyname(scanme1.nextLine());
 
-	while(scanme1.hasNext()!=EOF){check.coursecoordinator.setDepartment(scanme1.nextLine());
+						check.coursecoordinator.setFacultyaddress(scanme1.nextLine());
 
-	check.coursecoordinator.setFacultyname(scanme1.nextLine());
+						check.coursecoordinator.setFacultypnumber(scanme1.nextLine());
 
-	check.coursecoordinator.setFacultyaddress(scanme1.nextLine());
+						check.coursecoordinator.setFacultyemail(scanme1.nextLine());
+					}
 
-	check.coursecoordinator.setFacultypnumber(scanme1.nextLine());
+					for (w = 0; w < q; w++) {
 
-	check.coursecoordinator.setFacultyemail(scanme1.nextLine());}
+						check.fulty.get(w).setDepartment(scanme1.nextLine());
 
-	for(w=0;w<q;w++){
+						check.fulty.get(w).setFacultyname(scanme1.nextLine());
 
-	check.fulty.get(w).setDepartment(scanme1.nextLine());
+						check.fulty.get(w).setFacultyaddress(scanme1.nextLine());
 
-	check.fulty.get(w).setFacultyname(scanme1.nextLine());
+						check.fulty.get(w).setFacultypnumber(scanme1.nextLine());
 
-	check.fulty.get(w).setFacultyaddress(scanme1.nextLine());
+						check.fulty.get(w).setFacultyemail(scanme1.nextLine());
 
-	check.fulty.get(w).setFacultypnumber(scanme1.nextLine());
+					}
 
-	check.fulty.get(w).setFacultyemail(scanme1.nextLine());
+					for (w = 0; w < q1; w++) {
 
-	}
+						check.pants.get(w).setParticipantorg(scanme1.nextLine());
 
-	for(w=0;w<q1;w++){
+						check.pants.get(w).setParticipantname(scanme1.nextLine());
 
-	check.pants.get(w).setParticipantorg(scanme1.nextLine());
+						check.pants.get(w).setParticipantaddress(scanme1.nextLine());
 
-	check.pants.get(w).setParticipantname(scanme1.nextLine());
+						check.pants.get(w).setParticipantpnumber(scanme1.nextLine());
 
-	check.pants.get(w).setParticipantaddress(scanme1.nextLine());
+						check.pants.get(w).setParticipantemail(scanme1.nextLine());
+					}
 
-	check.pants.get(w).setParticipantpnumber(scanme1.nextLine());
+					coursea.add(check);
+					b--;
+				}
+				scanme1.close();
+				JOptionPane.showMessageDialog(frame, "Data is read");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(frame, "File not found ");
+			}
 
-	check.pants.get(w).setParticipantemail(scanme1.nextLine());}
-
-	coursea.add(check);b--;}scanme1.close();JOptionPane.showMessageDialog(null,"Data is read");}catch(Exception e){JOptionPane.showMessageDialog(null,"File not found ");}
-
-	setVisible(true);Data.setVisible(false);Parts.setVisible(true);}
+			frame.setVisible(true);
+			Data.setVisible(false);
+			Parts.setVisible(true);
+		}
 
 	};
-	ActionListener createnewdatalistener=new ActionListener(){@Override public void actionPerformed(ActionEvent arg0){Data.setVisible(false);Parts.setVisible(true);setVisible(true);}};
+	
 
 	/**
 	 * Create the applet.
 	 */
 	public CourseListFinal() {
-
-		JPanel Data = new JPanel();
-		getContentPane().add(Data);
+		frame.getContentPane().setLayout(new CardLayout(0, 0));
+		
+	    
+		
+		frame.getContentPane().add(Data, "name_175815259230734");
 		Data.setLayout(null);
 
 		JButton btnNewButton = new JButton("Old Data");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnNewButton.addActionListener(readmefilelistener);
-			}
-		});
+		btnNewButton.addActionListener(readmefilelistener);
 		btnNewButton.setBounds(166, 71, 97, 25);
 		Data.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("New Data");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnNewButton_1.addActionListener(createnewdatalistener);
+				frame.setVisible(true);
+				Data.setVisible(false);
+				Parts.setVisible(true);
 			}
 		});
 		btnNewButton_1.setBounds(166, 152, 97, 25);
 		Data.add(btnNewButton_1);
 
-		JPanel Parts = new JPanel();
-		getContentPane().add(Parts);
+		
+		frame.getContentPane().add(Parts, "name_175815273861270");
 		Parts.setLayout(null);
 
 		JButton btnCreateCourse = new JButton("Create Course");
 		btnCreateCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 				Data.setVisible(false);
 				Parts.setVisible(false);
-				
+
 				Course check = new Course();
 
 				check.setCoursename(JOptionPane.showInputDialog("Enter name"));
 
 				check.setCoursefee(JOptionPane.showInputDialog("Enter fee"));
 
-				date(JOptionPane.showInputDialog("Enter date"));
+				date=JOptionPane.showInputDialog("Enter date");
 				try {
 					somedate = format.parse(date);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 				check.setStartdate(somedate);
-
-
-				try {
-					jkl(JOptionPane.showInputDialog("Duration"));
-					p=Integer.parseInt(jkl);
-					sum(p);
-				} catch (MyException me) {
-
-				}
+				jkl=JOptionPane.showInputDialog("Duration");
+				p = Integer.parseInt(jkl);
+			
 
 				check.setDuration(p);
 				if (check.getDuration() > 14) {
-					JOptionPane.showMessageDialog(null,"Duration is more thna 14 days");
+					JOptionPane.showMessageDialog(frame, "Duration is more thna 14 days");
 					Runtime.getRuntime().exit(0);
 				}
 				coursea.add(check);
-		
+
 				Data.setVisible(false);
 				Parts.setVisible(true);
-				setVisible(true);
+				frame.setVisible(true);
 			}
 
 			private void date(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void jkl(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
-		
 		});
 		btnCreateCourse.setBounds(144, 0, 170, 25);
 		Parts.add(btnCreateCourse);
@@ -418,41 +431,46 @@ public class CourseListFinal extends JApplet {
 		btnNewButton_2.setBounds(144, 38, 170, 25);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 				Data.setVisible(false);
 				Parts.setVisible(false);
-				rs1(JOptionPane.showInputDialog("Give the course name in which the participant has to be added"));
+				rs1=(JOptionPane.showInputDialog("Give the course name in which the participant has to be added"));
 				for (j = 0; j < coursea.size(); j++) {
 					if ((coursea.get(j).getCoursename().compareTo(rs1) == 0) && (coursea.get(j).getPcount() < 5)) {
 						Participants fifa1 = new Participants();
 						coursea.get(j).pants.add(fifa1);
 
-						coursea.get(j).pants.get(coursea.get(j).getPcount()).setParticipantorg(JOptionPane.showInputDialog("Participant Organisation"));
+						coursea.get(j).pants.get(coursea.get(j).getPcount())
+								.setParticipantorg(JOptionPane.showInputDialog("Participant Organisation"));
 
-						coursea.get(j).pants.get(coursea.get(j).getPcount()).setParticipantname(JOptionPane.showInputDialog("Participant Name"));
+						coursea.get(j).pants.get(coursea.get(j).getPcount())
+								.setParticipantname(JOptionPane.showInputDialog("Participant Name"));
 
-						coursea.get(j).pants.get(coursea.get(j).getPcount()).setParticipantaddress(JOptionPane.showInputDialog("Participant Address"));
+						coursea.get(j).pants.get(coursea.get(j).getPcount())
+								.setParticipantaddress(JOptionPane.showInputDialog("Participant Address"));
 
-						coursea.get(j).pants.get(coursea.get(j).getPcount()).setParticipantpnumber(JOptionPane.showInputDialog("Participant number"));
+						coursea.get(j).pants.get(coursea.get(j).getPcount())
+								.setParticipantpnumber(JOptionPane.showInputDialog("Participant number"));
 
-						coursea.get(j).pants.get(coursea.get(j).getPcount()).setParticipantemail(JOptionPane.showInputDialog("Participant email"));
+						coursea.get(j).pants.get(coursea.get(j).getPcount())
+								.setParticipantemail(JOptionPane.showInputDialog("Participant email"));
 						coursea.get(j).setPcount(coursea.get(j).getPcount() + 1);
 						break;
 					}
 					if ((coursea.get(j).getCoursename().compareTo(rs1) == 0) && (coursea.get(j).getPcount() == 5)) {
-						JOptionPane.showMessageDialog(null, "No slots left.Participants are filled!!!");
+						JOptionPane.showMessageDialog(frame, "No slots left.Participants are filled!!!");
 						break;
 					}
 				}
-				
+
 				Data.setVisible(false);
 				Parts.setVisible(true);
-				setVisible(true);
+				frame.setVisible(true);
 			}
 
 			private void rs1(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		Parts.add(btnNewButton_2);
@@ -460,15 +478,16 @@ public class CourseListFinal extends JApplet {
 		JButton btnNewButton_3 = new JButton("Create Faculty");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 				Data.setVisible(false);
 				Parts.setVisible(false);
-				rs(JOptionPane.showInputDialog("Give the course name in which faculty has to be added"));
+				rs=(JOptionPane.showInputDialog("Give the course name in which faculty has to be added"));
 				for (j = 0; j < coursea.size(); j++) {
 					if (coursea.get(j).getCoursename().compareTo(rs) == 0) {
-						
-						fn(JOptionPane.showInputDialog("Enter a choice 1:to give details of course coord 2: to give instructor details"));
-						if ((fn == "1") && (coursea.get(j).coursecoordinator.getFacultyname() == null)) {
+
+						fn(JOptionPane.showInputDialog(
+								"Enter a choice 1:to give details of course coord 2: to give instructor details"));
+						if ((fn .compareTo("1")==0) && (coursea.get(j).coursecoordinator.getFacultyname() == null)) {
 
 							coursea.get(j).coursecoordinator.setDepartment(JOptionPane.showInputDialog("Department"));
 
@@ -481,38 +500,43 @@ public class CourseListFinal extends JApplet {
 							coursea.get(j).coursecoordinator.setFacultyemail(JOptionPane.showInputDialog("Email"));
 
 						}
-						if ((fn == "2")&&(coursea.get(j).getFcount() < 5)) {
+						if ((fn .compareTo("2")==0) && (coursea.get(j).getFcount() < 5)) {
 
 							Faculty fifa = new Faculty();
 							coursea.get(j).fulty.add(fifa);
-							coursea.get(j).fulty.get(coursea.get(j).getFcount()).setDepartment(JOptionPane.showInputDialog("Department"));
+							coursea.get(j).fulty.get(coursea.get(j).getFcount())
+									.setDepartment(JOptionPane.showInputDialog("Department"));
 
-							coursea.get(j).fulty.get(coursea.get(j).getFcount()).setFacultyname(JOptionPane.showInputDialog("Name"));
+							coursea.get(j).fulty.get(coursea.get(j).getFcount())
+									.setFacultyname(JOptionPane.showInputDialog("Name"));
 
-							coursea.get(j).fulty.get(coursea.get(j).getFcount()).setFacultyaddress(JOptionPane.showInputDialog("Address"));
+							coursea.get(j).fulty.get(coursea.get(j).getFcount())
+									.setFacultyaddress(JOptionPane.showInputDialog("Address"));
 
-							coursea.get(j).fulty.get(coursea.get(j).getFcount()).setFacultypnumber(JOptionPane.showInputDialog("Mobile"));
+							coursea.get(j).fulty.get(coursea.get(j).getFcount())
+									.setFacultypnumber(JOptionPane.showInputDialog("Mobile"));
 
-							coursea.get(j).fulty.get(coursea.get(j).getFcount()).setFacultyemail(JOptionPane.showInputDialog("Email"));
+							coursea.get(j).fulty.get(coursea.get(j).getFcount())
+									.setFacultyemail(JOptionPane.showInputDialog("Email"));
 							coursea.get(j).setFcount(coursea.get(j).getFcount() + 1);
 							break;
 						}
 					}
 				}
-				
+
 				Data.setVisible(false);
 				Parts.setVisible(true);
-				setVisible(true);
+				frame.setVisible(true);
 			}
 
 			private void fn(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void rs(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		btnNewButton_3.setBounds(144, 76, 170, 25);
@@ -521,30 +545,30 @@ public class CourseListFinal extends JApplet {
 		JButton btnNewButton_4 = new JButton("Delete/Alter course");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 				Data.setVisible(false);
 				Parts.setVisible(false);
-					
-				fn(JOptionPane.showInputDialog("Enter a choice 1:Delete the course 2:Alter the course"));			
 
-				if (fn == "1") {
-			
-					rs(JOptionPane.showInputDialog("Enter the course name to be deleted"));
+				fn=(JOptionPane.showInputDialog("Enter a choice 1:Delete the course 2:Alter the course"));
+
+				if (fn .compareTo("1")==0) {
+
+					rs=(JOptionPane.showInputDialog("Enter the course name to be deleted"));
 
 					for (j = 0; j < coursea.size(); j++) {
 						if (coursea.get(j).getCoursename().compareTo(rs) == 0) {
 							coursea.remove(j);
-							JOptionPane.showMessageDialog(null, "Successfully deleted");
+							JOptionPane.showMessageDialog(frame, "Successfully deleted");
 							break;
 						}
 					}
 
-				} else if (fn == "2") {
-					
-					rs(JOptionPane.showInputDialog("Enter the course name to be altered"));
+				} else if (fn .compareTo("2")==0) {
+
+					rs=(JOptionPane.showInputDialog("Enter the course name to be altered"));
 					for (j = 0; j < coursea.size(); j++) {
 						if (coursea.get(j).getCoursename().compareTo(rs) == 0) {
-							
+
 							coursea.get(j).setCoursename(JOptionPane.showInputDialog("Course name"));
 
 							coursea.get(j).setCoursefee(JOptionPane.showInputDialog("Course fee"));
@@ -557,50 +581,46 @@ public class CourseListFinal extends JApplet {
 								e1.printStackTrace();
 							}
 							coursea.get(j).setStartdate(somedate);
-
-							try {
-								jkl(JOptionPane.showInputDialog("Duration"));
-								p=Integer.parseInt(jkl);
-								sum(p);
-							} catch (MyException me) {
-
-							}
+							jkl=JOptionPane.showInputDialog("Duration");
+							p = Integer.parseInt(jkl);
+							
 
 							coursea.get(j).setDuration(p);
 
 							if (coursea.get(j).getDuration() > 14) {
-								JOptionPane.showMessageDialog(null,"duration is more than 14 days");
+								JOptionPane.showMessageDialog(frame, "duration is more than 14 days");
 								Runtime.getRuntime().exit(0);
 							}
-							JOptionPane.showMessageDialog(null,"Successfully altered");
+							JOptionPane.showMessageDialog(frame, "Successfully altered");
 							break;
 						}
 					}
-				}else  JOptionPane.showMessageDialog(null,"wrong opton entered");
-					
-				setVisible(true);
+				} else
+					JOptionPane.showMessageDialog(frame, "wrong option entered");
+
+				frame.setVisible(true);
 				Data.setVisible(false);
 				Parts.setVisible(true);
 			}
 
 			private void jkl(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void date(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void rs(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void fn(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		btnNewButton_4.setBounds(144, 114, 170, 25);
@@ -609,17 +629,17 @@ public class CourseListFinal extends JApplet {
 		JButton btnNewButton_5 = new JButton("Delete/Alter participant");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 				Data.setVisible(false);
 				Parts.setVisible(false);
-				
-				rs(JOptionPane.showInputDialog("Give the course name in which changes have to be made  "));
+
+				rs=JOptionPane.showInputDialog("Give the course name in which changes have to be made  ");
 				for (j = 0; j < coursea.size(); j++) {
 					if (coursea.get(j).getCoursename().compareTo(rs) == 0) {
-						jkl(JOptionPane.showInputDialog("1:Delete 2:Alter participant details"));
-						
-						if (jkl == "1") {
-							rs(JOptionPane.showInputDialog("Name of the participant to be  deleted"));
+						jkl=JOptionPane.showInputDialog("1:Delete 2:Alter participant details");
+
+						if (jkl .compareTo("1")==0) {
+							rs=JOptionPane.showInputDialog("Name of the participant to be  deleted");
 							for (k = 0; k < coursea.get(j).pants.size(); k++) {
 								if (coursea.get(j).pants.get(k).getParticipantname().compareTo(rs1) == 0) {
 									coursea.get(j).pants.remove(coursea.get(j).pants.get(k));
@@ -627,47 +647,51 @@ public class CourseListFinal extends JApplet {
 								}
 							}
 
-						} else if (jkl == "2") {
-							rs1(JOptionPane.showInputDialog("Give the participant name in which changes have to be made  "));
+						} else if (jkl .compareTo("2")==0) {
+							rs1=(JOptionPane
+									.showInputDialog("Give the participant name in which changes have to be made  "));
 
 							for (k = 0; k < coursea.get(j).pants.size(); k++) {
 								if (coursea.get(j).pants.get(k).getParticipantname().compareTo(rs1) == 0) {
 
-									coursea.get(j).pants.get(k).setParticipantorg(JOptionPane.showInputDialog("Organisation"));
+									coursea.get(j).pants.get(k)
+											.setParticipantorg(JOptionPane.showInputDialog("Organisation"));
 
 									coursea.get(j).pants.get(k).setParticipantname(JOptionPane.showInputDialog("Name"));
 
-									coursea.get(j).pants.get(k).setParticipantpnumber(JOptionPane.showInputDialog("Mobile"));
+									coursea.get(j).pants.get(k)
+											.setParticipantpnumber(JOptionPane.showInputDialog("Mobile"));
 
-									coursea.get(j).pants.get(k).setParticipantemail(JOptionPane.showInputDialog("Email"));
+									coursea.get(j).pants.get(k)
+											.setParticipantemail(JOptionPane.showInputDialog("Email"));
 
-									coursea.get(j).pants.get(k).setParticipantaddress(JOptionPane.showInputDialog("Address"));
+									coursea.get(j).pants.get(k)
+											.setParticipantaddress(JOptionPane.showInputDialog("Address"));
 								}
 							}
 						} else
 							break;
 					}
 				}
-				
-				
-				setVisible(true);
+
+				frame.setVisible(true);
 				Data.setVisible(false);
 				Parts.setVisible(true);
 			}
 
 			private void rs1(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void jkl(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			private void rs(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		btnNewButton_5.setBounds(144, 152, 170, 25);
@@ -676,74 +700,67 @@ public class CourseListFinal extends JApplet {
 		JButton btnNewButton_6 = new JButton("Delete/Alter faculty");
 		btnNewButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 				Parts.setVisible(false);
 				Data.setVisible(false);
-				
-				rs(JOptionPane.showInputDialog("Give the course name in which faculty has to be deleted or altered"));
+
+				rs=(JOptionPane.showInputDialog("Give the course name in which faculty has to be deleted or altered"));
 				for (j = 0; j < coursea.size(); j++) {
 					if (coursea.get(j).getCoursename().compareTo(rs) == 0) {
-						System.out.println("Enter 1 to delete the course coordinator from the course  ");
-						System.out.println("Enter 2 to alter the course coordinator details in the course  ");
-						System.out.println("Enter 3 to delete instructor from the course  ");
-						System.out.println("Enter 4 to alter instructor details in the course  ");
-						jkl(JOptionPane.showInputDialog("1:Delete course coord"
-								+ "2:Alter course coord"));
-						if (l == 1) {
+
+						jkl=(JOptionPane.showInputDialog("1:Delete course coord" + "2:Alter course coord"
+								+ "3:delete instructor" + "4:Alter instructor"));
+						if (jkl .compareTo("1")==0) {
 							coursea.get(j).coursecoordinator = null;
-							System.out.println("Course coordinator deleted successfully....");
 
+							JOptionPane.showMessageDialog(frame, "successfully deleted");
 							break;
-						} else if (l == 2) {
-							System.out.println("Give the new details of course coordinator  ");
+						} else if (jkl .compareTo("2")==0) {
 
-							System.out.println("Course coordinator department:");
-							coursea.get(j).coursecoordinator.setDepartment(scanme.nextLine());
+							coursea.get(j).coursecoordinator.setDepartment(JOptionPane.showInputDialog("Department"));
 
-							System.out.println("Course coordinator name:");
-							coursea.get(j).coursecoordinator.setFacultyname(scanme.nextLine());
+							coursea.get(j).coursecoordinator.setFacultyname(JOptionPane.showInputDialog("Name"));
 
-							System.out.println("Course coordinator address:");
-							coursea.get(j).coursecoordinator.setFacultyaddress(scanme.nextLine());
+							coursea.get(j).coursecoordinator.setFacultyaddress(JOptionPane.showInputDialog("Address"));
 
-							System.out.println("Course coordinator mobile:");
-							coursea.get(j).coursecoordinator.setFacultypnumber(scanme.nextLine());
+							coursea.get(j).coursecoordinator.setFacultypnumber(JOptionPane.showInputDialog("mobile"));
 
-							System.out.println("Course coordinator email:");
-							coursea.get(j).coursecoordinator.setFacultyemail(scanme.nextLine());
+							coursea.get(j).coursecoordinator.setFacultyemail(JOptionPane.showInputDialog("email"));
 							break;
-						} else if (l == 3) {
-							System.out.println("Give the name of the instructor to be deleted  ");
-							rs1 = scanme.nextLine();
+						} else if (jkl .compareTo("3")==0) {
+
+							rs1=(JOptionPane.showInputDialog("Give instructor name to be deleted"));
 
 							for (k = 0; (k < coursea.get(j).fulty.size()); k++) {
 								if (coursea.get(j).fulty.get(k).getFacultyname().compareTo(rs1) == 0) {
 									coursea.get(j).fulty.remove(coursea.get(j).fulty.get(k));
 									coursea.get(j).setFcount(coursea.get(j).getFcount() - 1);
-									System.out.println("Instructor deleted successfully....");
+									JOptionPane.showMessageDialog(frame, "successfully deleted");
 									break;
 								}
 							}
 
-						} else if (l == 4) {
-							System.out.println("Give the name of the instructor to be altered  ");
-							rs1 = scanme.nextLine();
+						} else if (jkl .compareTo("4")==0) {
+							rs1=(JOptionPane.showInputDialog("Give instructor name to be altered"));
 							for (k = 0; k < coursea.get(j).fulty.size(); k++) {
 								if (coursea.get(j).fulty.get(k).getFacultyname().compareTo(rs1) == 0) {
 									System.out.println("Instructor department:");
-									coursea.get(j).fulty.get(k).setDepartment(scanme.nextLine());
+									coursea.get(j).fulty.get(k)
+											.setDepartment(JOptionPane.showInputDialog("Department"));
 
 									System.out.println("Instructor name:");
-									coursea.get(j).fulty.get(k).setFacultyname(scanme.nextLine());
+									coursea.get(j).fulty.get(k).setFacultyname(JOptionPane.showInputDialog("Name"));
 
 									System.out.println("Instructor mobile:");
-									coursea.get(j).fulty.get(k).setFacultypnumber(scanme.nextLine());
+									coursea.get(j).fulty.get(k)
+											.setFacultypnumber(JOptionPane.showInputDialog("Mobile"));
 
 									System.out.println("Instructor email:");
-									coursea.get(j).fulty.get(k).setFacultyemail(scanme.nextLine());
+									coursea.get(j).fulty.get(k).setFacultyemail(JOptionPane.showInputDialog("email"));
 
 									System.out.println("Instructor address:");
-									coursea.get(j).fulty.get(k).setFacultyaddress(scanme.nextLine());
+									coursea.get(j).fulty.get(k)
+											.setFacultyaddress(JOptionPane.showInputDialog("Address"));
 									break;
 								}
 							}
@@ -751,24 +768,374 @@ public class CourseListFinal extends JApplet {
 							break;
 					}
 				}
-				
-				
-				setVisible(true);
+
+				frame.setVisible(true);
 				Parts.setVisible(true);
 				Data.setVisible(false);
 			}
 
+			private void rs1(String showInputDialog) {
+				// TODO Auto-generated method stub
+
+			}
+
+			private void jkl(String showInputDialog) {
+				// TODO Auto-generated method stub
+
+			}
+
 			private void rs(String showInputDialog) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		btnNewButton_6.setBounds(144, 190, 170, 25);
 		Parts.add(btnNewButton_6);
 
+		
 		JButton btnNewButton_7 = new JButton("Display");
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				Parts.setVisible(false);
+				Data.setVisible(false);
+
+				rs=(JOptionPane.showInputDialog(
+						"1:Display courses 2:Display Faculty 3:Dispaly participant 4:Display all for 5 years"));
+				if (rs.compareTo("1")==0) {
+					for (j = 0; j < coursea.size(); j++) {
+						qwe = ("Course" + (j + 1) + ":");
+						rty = ("Coursename:" + coursea.get(j).getCoursename());
+						uio = ("Coursefee :" + coursea.get(j).getCoursefee());
+						asd = ("Startdate :" + coursea.get(j).getStartdate());
+						bnm = ("Duration  :" + coursea.get(j).getDuration());
+						output = output + "\n" + qwe + "\n" + rty + "\n" + uio + "\n" + asd + "\n" + bnm + "\n";
+					}
+					JOptionPane.showMessageDialog(frame, output);
+				} else if (rs.compareTo("2")==0) {
+					output = null;
+					rs1=(JOptionPane
+							.showInputDialog("Give the name of the coursename in which faculty has to be displayed "));
+					for (j = 0; j < coursea.size(); j++) {
+						if (coursea.get(j).getCoursename().compareTo(rs1) == 0) {
+							if (coursea.get(j).coursecoordinator.getFacultyname() != null) {
+								qwe = ("Department:" + coursea.get(j).coursecoordinator.getDepartment());
+								rty = ("Name      :" + coursea.get(j).coursecoordinator.getFacultyname());
+								uio = ("Address   :" + coursea.get(j).coursecoordinator.getFacultyaddress());
+								asd = ("Mobile    :" + coursea.get(j).coursecoordinator.getFacultypnumber());
+								bnm = ("Email     :" + coursea.get(j).coursecoordinator.getFacultyemail());
+								output = output + "\n" + qwe + "\n" + rty + "\n" + uio + "\n" + asd + "\n" + bnm + "\n";
+							}
+
+							for (k = 0; k < coursea.get(j).fulty.size(); k++) {
+
+								qwe = ("Department:" + coursea.get(j).fulty.get(k).getDepartment());
+								rty = ("Name      :" + coursea.get(j).fulty.get(k).getFacultyname());
+								uio = ("Address   :" + coursea.get(j).fulty.get(k).getFacultyaddress());
+								asd = ("Mobile    :" + coursea.get(j).fulty.get(k).getFacultypnumber());
+								bnm = ("Email     :" + coursea.get(j).fulty.get(k).getFacultyemail());
+								output = output + "\n" + "Faculty"
+										+ coursea.get(j).fulty.indexOf(coursea.get(j).fulty.get(k)) + 1 + ":" + qwe
+										+ "\n" + rty + "\n" + uio + "\n" + asd + "\n" + bnm + "\n";
+							}
+							JOptionPane.showMessageDialog(frame, output);
+						}
+					}
+				} else if (rs .compareTo("3")==0) {
+					output = null;
+					rs1=(JOptionPane.showInputDialog(
+							"Give the name of the coursename in which participant has to be displayed "));
+					for (j = 0; j < coursea.size(); j++) {
+						if (coursea.get(j).getCoursename().compareTo(rs1) == 0) {
+							for (k = 0; k < coursea.get(j).pants.size(); k++) {
+
+								qwe = ("Organisation:" + coursea.get(j).pants.get(k).getParticipantorg());
+								rty = ("Name        :" + coursea.get(j).pants.get(k).getParticipantname());
+								uio = ("Address     :" + coursea.get(j).pants.get(k).getParticipantaddress());
+								asd = ("Mobile      :" + coursea.get(j).pants.get(k).getParticipantpnumber());
+								bnm = ("Email       :" + coursea.get(j).pants.get(k).getParticipantemail());
+								output = output + "\n"
+										+ ("Participant" + coursea.get(j).pants.indexOf(coursea.get(j).pants.get(k)) + 1
+												+ ":")
+										+ "\n" + qwe + "\n" + rty + "\n" + uio + "\n" + asd + "\n" + bnm + "\n";
+							}
+							JOptionPane.showMessageDialog(frame, output);
+
+						}
+					}
+
+				} else if (rs .compareTo("4")==0) {
+					new_ten = 0;
+					output = null;
+					for (j = 0; j < coursea.size(); j++) {
+						somedate = coursea.get(j).getStartdate();
+						x = nowdate.getTime() - somedate.getTime();
+						x = x / DAY;
+						if (x >= 0 && x < 366) {
+							if (new_ten <= 10) {
+
+								uio = Integer.toString(coursea.indexOf(coursea.get(j)) + 1);
+								qwe = (coursea.get(j).getCoursename());
+								rty = (coursea.get(j).getCoursefee());
+								tempo = format.format(coursea.get(j).getStartdate());
+								asd = (tempo);
+								bnm = Integer.toString(coursea.get(j).getDuration());
+								output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+
+								for (k = 0; k < coursea.get(j).pants.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).pants.indexOf(coursea.get(j).pants.get(k)) + 1);
+									qwe = (coursea.get(j).pants.get(k).getParticipantorg());
+									rty = (coursea.get(j).pants.get(k).getParticipantname());
+									asd = (coursea.get(j).pants.get(k).getParticipantaddress());
+									bnm = (coursea.get(j).pants.get(k).getParticipantpnumber());
+									cvb = (coursea.get(j).pants.get(k).getParticipantemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+
+								if (coursea.get(j).coursecoordinator.getDepartment() != null) {
+									uio = (coursea.get(j).coursecoordinator.getDepartment());
+									qwe = (coursea.get(j).coursecoordinator.getFacultyname());
+									rty = (coursea.get(j).coursecoordinator.getFacultyaddress());
+									asd = (coursea.get(j).coursecoordinator.getFacultypnumber());
+									bnm = (coursea.get(j).coursecoordinator.getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+								}
+
+								for (k = 0; k < coursea.get(j).fulty.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).fulty.indexOf(coursea.get(j).fulty.get(k)) + 1);
+									qwe = (coursea.get(j).fulty.get(k).getDepartment());
+									rty = (coursea.get(j).fulty.get(k).getFacultyname());
+									asd = (coursea.get(j).fulty.get(k).getFacultyaddress());
+									bnm = (coursea.get(j).fulty.get(k).getFacultypnumber());
+									cvb = (coursea.get(j).fulty.get(k).getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+								new_ten++;
+
+							}
+
+						}
+						new_ten = 0;
+						if (x >= 366 && x < 2 * 366) {
+							if (new_ten <= 10) {
+
+								uio = Integer.toString(coursea.indexOf(coursea.get(j)) + 1);
+								qwe = (coursea.get(j).getCoursename());
+								rty = (coursea.get(j).getCoursefee());
+								tempo = format.format(coursea.get(j).getStartdate());
+								asd = (tempo);
+								bnm = Integer.toString(coursea.get(j).getDuration());
+								output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+
+								for (k = 0; k < coursea.get(j).pants.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).pants.indexOf(coursea.get(j).pants.get(k)) + 1);
+									qwe = (coursea.get(j).pants.get(k).getParticipantorg());
+									rty = (coursea.get(j).pants.get(k).getParticipantname());
+									asd = (coursea.get(j).pants.get(k).getParticipantaddress());
+									bnm = (coursea.get(j).pants.get(k).getParticipantpnumber());
+									cvb = (coursea.get(j).pants.get(k).getParticipantemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+
+								if (coursea.get(j).coursecoordinator.getDepartment() != null) {
+									uio = (coursea.get(j).coursecoordinator.getDepartment());
+									qwe = (coursea.get(j).coursecoordinator.getFacultyname());
+									rty = (coursea.get(j).coursecoordinator.getFacultyaddress());
+									asd = (coursea.get(j).coursecoordinator.getFacultypnumber());
+									bnm = (coursea.get(j).coursecoordinator.getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+								}
+
+								for (k = 0; k < coursea.get(j).fulty.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).fulty.indexOf(coursea.get(j).fulty.get(k)) + 1);
+									qwe = (coursea.get(j).fulty.get(k).getDepartment());
+									rty = (coursea.get(j).fulty.get(k).getFacultyname());
+									asd = (coursea.get(j).fulty.get(k).getFacultyaddress());
+									bnm = (coursea.get(j).fulty.get(k).getFacultypnumber());
+									cvb = (coursea.get(j).fulty.get(k).getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+								new_ten++;
+
+							}
+
+						}
+						new_ten = 0;
+						if (x >= 2 * 366 && x < 3 * 366) {
+							if (new_ten <= 10) {
+
+								uio = Integer.toString(coursea.indexOf(coursea.get(j)) + 1);
+								qwe = (coursea.get(j).getCoursename());
+								rty = (coursea.get(j).getCoursefee());
+								tempo = format.format(coursea.get(j).getStartdate());
+								asd = (tempo);
+								bnm = Integer.toString(coursea.get(j).getDuration());
+								output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+
+								for (k = 0; k < coursea.get(j).pants.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).pants.indexOf(coursea.get(j).pants.get(k)) + 1);
+									qwe = (coursea.get(j).pants.get(k).getParticipantorg());
+									rty = (coursea.get(j).pants.get(k).getParticipantname());
+									asd = (coursea.get(j).pants.get(k).getParticipantaddress());
+									bnm = (coursea.get(j).pants.get(k).getParticipantpnumber());
+									cvb = (coursea.get(j).pants.get(k).getParticipantemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+
+								if (coursea.get(j).coursecoordinator.getDepartment() != null) {
+									uio = (coursea.get(j).coursecoordinator.getDepartment());
+									qwe = (coursea.get(j).coursecoordinator.getFacultyname());
+									rty = (coursea.get(j).coursecoordinator.getFacultyaddress());
+									asd = (coursea.get(j).coursecoordinator.getFacultypnumber());
+									bnm = (coursea.get(j).coursecoordinator.getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+								}
+
+								for (k = 0; k < coursea.get(j).fulty.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).fulty.indexOf(coursea.get(j).fulty.get(k)) + 1);
+									qwe = (coursea.get(j).fulty.get(k).getDepartment());
+									rty = (coursea.get(j).fulty.get(k).getFacultyname());
+									asd = (coursea.get(j).fulty.get(k).getFacultyaddress());
+									bnm = (coursea.get(j).fulty.get(k).getFacultypnumber());
+									cvb = (coursea.get(j).fulty.get(k).getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+								new_ten++;
+
+							}
+
+						}
+						new_ten = 0;
+						if (x >= 3 * 366 && x < 4 * 366) {
+							if (new_ten <= 10) {
+
+								uio = Integer.toString(coursea.indexOf(coursea.get(j)) + 1);
+								qwe = (coursea.get(j).getCoursename());
+								rty = (coursea.get(j).getCoursefee());
+								tempo = format.format(coursea.get(j).getStartdate());
+								asd = (tempo);
+								bnm = Integer.toString(coursea.get(j).getDuration());
+								output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+
+								for (k = 0; k < coursea.get(j).pants.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).pants.indexOf(coursea.get(j).pants.get(k)) + 1);
+									qwe = (coursea.get(j).pants.get(k).getParticipantorg());
+									rty = (coursea.get(j).pants.get(k).getParticipantname());
+									asd = (coursea.get(j).pants.get(k).getParticipantaddress());
+									bnm = (coursea.get(j).pants.get(k).getParticipantpnumber());
+									cvb = (coursea.get(j).pants.get(k).getParticipantemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+
+								if (coursea.get(j).coursecoordinator.getDepartment() != null) {
+									uio = (coursea.get(j).coursecoordinator.getDepartment());
+									qwe = (coursea.get(j).coursecoordinator.getFacultyname());
+									rty = (coursea.get(j).coursecoordinator.getFacultyaddress());
+									asd = (coursea.get(j).coursecoordinator.getFacultypnumber());
+									bnm = (coursea.get(j).coursecoordinator.getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+								}
+
+								for (k = 0; k < coursea.get(j).fulty.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).fulty.indexOf(coursea.get(j).fulty.get(k)) + 1);
+									qwe = (coursea.get(j).fulty.get(k).getDepartment());
+									rty = (coursea.get(j).fulty.get(k).getFacultyname());
+									asd = (coursea.get(j).fulty.get(k).getFacultyaddress());
+									bnm = (coursea.get(j).fulty.get(k).getFacultypnumber());
+									cvb = (coursea.get(j).fulty.get(k).getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+								new_ten++;
+
+							}
+
+						}
+						new_ten = 0;
+						if (x >= 4 * 366 && x < 5 * 366) {
+							if (new_ten <= 10) {
+
+								uio = Integer.toString(coursea.indexOf(coursea.get(j)) + 1);
+								qwe = (coursea.get(j).getCoursename());
+								rty = (coursea.get(j).getCoursefee());
+								tempo = format.format(coursea.get(j).getStartdate());
+								asd = (tempo);
+								bnm = Integer.toString(coursea.get(j).getDuration());
+								output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+
+								for (k = 0; k < coursea.get(j).pants.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).pants.indexOf(coursea.get(j).pants.get(k)) + 1);
+									qwe = (coursea.get(j).pants.get(k).getParticipantorg());
+									rty = (coursea.get(j).pants.get(k).getParticipantname());
+									asd = (coursea.get(j).pants.get(k).getParticipantaddress());
+									bnm = (coursea.get(j).pants.get(k).getParticipantpnumber());
+									cvb = (coursea.get(j).pants.get(k).getParticipantemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+
+								if (coursea.get(j).coursecoordinator.getDepartment() != null) {
+									uio = (coursea.get(j).coursecoordinator.getDepartment());
+									qwe = (coursea.get(j).coursecoordinator.getFacultyname());
+									rty = (coursea.get(j).coursecoordinator.getFacultyaddress());
+									asd = (coursea.get(j).coursecoordinator.getFacultypnumber());
+									bnm = (coursea.get(j).coursecoordinator.getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm;
+								}
+
+								for (k = 0; k < coursea.get(j).fulty.size(); k++) {
+									uio = Integer
+											.toString(coursea.get(j).fulty.indexOf(coursea.get(j).fulty.get(k)) + 1);
+									qwe = (coursea.get(j).fulty.get(k).getDepartment());
+									rty = (coursea.get(j).fulty.get(k).getFacultyname());
+									asd = (coursea.get(j).fulty.get(k).getFacultyaddress());
+									bnm = (coursea.get(j).fulty.get(k).getFacultypnumber());
+									cvb = (coursea.get(j).fulty.get(k).getFacultyemail());
+									output = output + "\n" + uio + "\n" + qwe + "\n" + rty + "\n" + asd + "\n" + bnm
+											+ "\n" + cvb;
+								}
+								new_ten++;
+
+							}
+
+						}
+
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(frame, "Entered Wrong Option");
+				}
+				
+				frame.setVisible(true);
+				Parts.setVisible(true);
+				Data.setVisible(false);
+			
+            }
+
+			private void rs1(String showInputDialog) {
+				// TODO Auto-generated method stub
+
+			}
+
+			private void rs(String showInputDialog) {
+				// TODO Auto-generated method stub
+
 			}
 		});
 		btnNewButton_7.setBounds(144, 230, 170, 25);
@@ -777,11 +1144,11 @@ public class CourseListFinal extends JApplet {
 		JButton btnNewButton_8 = new JButton("Exit");
 		btnNewButton_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				frame.setVisible(false);
 
 				Parts.setVisible(false);
 				Data.setVisible(false);
-				
+
 				if (!file.exists()) {
 					try {
 						file.createNewFile();
@@ -797,88 +1164,84 @@ public class CourseListFinal extends JApplet {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-				try{
-				BufferedWriter bwriter = new BufferedWriter(fwriter);
-				bwriter.write(Integer.toString(coursea.size()));
-				bwriter.newLine();
-				for (i = 0; i < coursea.size(); i++) {
+				try {
+					BufferedWriter bwriter = new BufferedWriter(fwriter);
+					bwriter.write(Integer.toString(coursea.size()));
+					bwriter.newLine();
+					for (i = 0; i < coursea.size(); i++) {
 
-					bwriter.write(coursea.get(i).getCoursename());
-					bwriter.newLine();
-					bwriter.write(coursea.get(i).getCoursefee());
-					bwriter.newLine();
-					xoxo = format.format(coursea.get(i).getStartdate());
-					bwriter.write(xoxo);
-					bwriter.newLine();
-					bwriter.write(Integer.toString(coursea.get(i).getDuration()));
-					bwriter.newLine();
+						bwriter.write(coursea.get(i).getCoursename());
+						bwriter.newLine();
+						bwriter.write(coursea.get(i).getCoursefee());
+						bwriter.newLine();
+						xoxo = format.format(coursea.get(i).getStartdate());
+						bwriter.write(xoxo);
+						bwriter.newLine();
+						bwriter.write(Integer.toString(coursea.get(i).getDuration()));
+						bwriter.newLine();
 
-					bwriter.write(Integer.toString(coursea.get(i).getFcount()));
-					bwriter.newLine();
-					bwriter.write(Integer.toString(coursea.get(i).getPcount()));
-					bwriter.newLine();
+						bwriter.write(Integer.toString(coursea.get(i).getFcount()));
+						bwriter.newLine();
+						bwriter.write(Integer.toString(coursea.get(i).getPcount()));
+						bwriter.newLine();
 
-					if (coursea.get(i).coursecoordinator.getFacultyname() != null) {
+						if (coursea.get(i).coursecoordinator.getFacultyname() != null) {
 
-						bwriter.write(coursea.get(i).coursecoordinator.getDepartment());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).coursecoordinator.getFacultyname());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).coursecoordinator.getFacultyaddress());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).coursecoordinator.getFacultypnumber());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).coursecoordinator.getFacultyemail());
-						bwriter.newLine();
+							bwriter.write(coursea.get(i).coursecoordinator.getDepartment());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).coursecoordinator.getFacultyname());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).coursecoordinator.getFacultyaddress());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).coursecoordinator.getFacultypnumber());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).coursecoordinator.getFacultyemail());
+							bwriter.newLine();
+						}
+
+						for (k = 0; k < coursea.get(i).getFcount(); k++) {
+
+							bwriter.write(coursea.get(i).fulty.get(k).getDepartment());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).fulty.get(k).getFacultyname());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).fulty.get(k).getFacultyaddress());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).fulty.get(k).getFacultypnumber());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).fulty.get(k).getFacultyemail());
+							bwriter.newLine();
+
+						}
+
+						for (k = 0; k < coursea.get(i).getPcount(); k++) {
+
+							bwriter.write(coursea.get(i).pants.get(k).getParticipantorg());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).pants.get(k).getParticipantname());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).pants.get(k).getParticipantaddress());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).pants.get(k).getParticipantemail());
+							bwriter.newLine();
+							bwriter.write(coursea.get(i).pants.get(k).getParticipantpnumber());
+							bwriter.newLine();
+						}
+
+						bwriter.close();
+						fwriter.close();
 					}
 
-					for (k = 0; k < coursea.get(i).getFcount(); k++) {
-
-						bwriter.write(coursea.get(i).fulty.get(k).getDepartment());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).fulty.get(k).getFacultyname());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).fulty.get(k).getFacultyaddress());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).fulty.get(k).getFacultypnumber());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).fulty.get(k).getFacultyemail());
-						bwriter.newLine();
-
-					}
-
-					for (k = 0; k < coursea.get(i).getPcount(); k++) {
-
-						bwriter.write(coursea.get(i).pants.get(k).getParticipantorg());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).pants.get(k).getParticipantname());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).pants.get(k).getParticipantaddress());
-						bwriter.newLine();
-
-						bwriter.write(coursea.get(i).pants.get(k).getParticipantemail());
-						bwriter.newLine();
-						bwriter.write(coursea.get(i).pants.get(k).getParticipantpnumber());
-						bwriter.newLine();
-					}
-					
-					bwriter.close();
-					fwriter.close();
-				}
-				
-				
-				}
-				catch (IOException e1) {
+				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
+
 			}
 		});
 		btnNewButton_8.setBounds(144, 268, 170, 25);
 		Parts.add(btnNewButton_8);
-		
+
 	}
 
 }
